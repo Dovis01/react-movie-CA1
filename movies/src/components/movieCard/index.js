@@ -14,6 +14,7 @@ import img from '../../images/film-poster-placeholder.png'
 import {Link} from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import { MoviesContext } from "../../contexts/moviesContext";
+import backgroundImageStyles from "../../theme/background";
 
 export default function MovieCard({ movie, action }) {
     const { favorites } = useContext(MoviesContext);
@@ -24,7 +25,7 @@ export default function MovieCard({ movie, action }) {
         movie.favorite = false
     }
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345 }} elevation={5} style={backgroundImageStyles.backgroundCardContainer}>
             <CardHeader
                 avatar={
                     movie.favorite ? (

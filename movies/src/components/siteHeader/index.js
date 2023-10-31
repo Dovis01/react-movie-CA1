@@ -11,6 +11,8 @@ import {useNavigate} from "react-router-dom";
 import {styled} from '@mui/material/styles';
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import colorTheme from "../../theme/adjustColor";
+import {ThemeProvider} from '@mui/material/styles';
 
 const Offset = styled('div')(({theme}) => theme.mixins.toolbar);
 
@@ -38,66 +40,68 @@ const SiteHeader = ({history}) => {
 
     return (
         <>
-            <AppBar position="fixed" color="secondary">
-                <Toolbar>
-                    <Typography variant="h4" sx={{flexGrow: 1}}>
-                        TMDB Client
-                    </Typography>
-                    <Typography variant="h6" sx={{flexGrow: 1}}>
-                        All you ever wanted to know about Movies!
-                    </Typography>
-                    {isMobile ? (
-                        <>
-                            <IconButton
-                                aria-label="menu"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <MenuIcon/>
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: "top",
-                                    horizontal: "right",
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: "top",
-                                    horizontal: "right",
-                                }}
-                                open={open}
-                                onClose={() => setAnchorEl(null)}
-                            >
+            <ThemeProvider theme={colorTheme}>
+                <AppBar position="fixed" color="primary" elevation={8} sx={{padding:0.75}}>
+                    <Toolbar>
+                        <Typography variant="h4" sx={{flexGrow: 1}}>
+                            TMDB Client
+                        </Typography>
+                        <Typography variant="h6" sx={{flexGrow: 1}}>
+                            All you ever wanted to know about Movies!
+                        </Typography>
+                        {isMobile ? (
+                            <>
+                                <IconButton
+                                    aria-label="menu"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleMenu}
+                                    color="inherit"
+                                >
+                                    <MenuIcon/>
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: "top",
+                                        horizontal: "right",
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: "top",
+                                        horizontal: "right",
+                                    }}
+                                    open={open}
+                                    onClose={() => setAnchorEl(null)}
+                                >
+                                    {menuOptions.map((opt) => (
+                                        <MenuItem
+                                            key={opt.label}
+                                            onClick={() => handleMenuSelect(opt.path)}
+                                        >
+                                            {opt.label}
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </>
+                        ) : (
+                            <>
                                 {menuOptions.map((opt) => (
-                                    <MenuItem
+                                    <Button
                                         key={opt.label}
+                                        color="inherit"
                                         onClick={() => handleMenuSelect(opt.path)}
                                     >
                                         {opt.label}
-                                    </MenuItem>
+                                    </Button>
                                 ))}
-                            </Menu>
-                        </>
-                    ) : (
-                        <>
-                            {menuOptions.map((opt) => (
-                                <Button
-                                    key={opt.label}
-                                    color="inherit"
-                                    onClick={() => handleMenuSelect(opt.path)}
-                                >
-                                    {opt.label}
-                                </Button>
-                            ))}
-                        </>
-                    )}
-                </Toolbar>
-            </AppBar>
-            <Offset/>
+                            </>
+                        )}
+                    </Toolbar>
+                </AppBar>
+                <Offset/>
+            </ThemeProvider>
         </>
     );
 };

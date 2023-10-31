@@ -6,6 +6,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import backgroundImageStyles from "../../theme/background";
 
 const TemplateMoviePage = ({ movie, children }) => {
     const { data , error, isLoading, isError } = useQuery(
@@ -24,9 +25,8 @@ const TemplateMoviePage = ({ movie, children }) => {
 
     return (
         <>
-            <MovieHeader movie={movie} />
-
-            <Grid container spacing={5} sx={{ padding: "15px" }}>
+            <MovieHeader movie={movie} sx={{padding:"20px"}}/>
+            <Grid container spacing={5} sx={{ padding: "20px" }} style={backgroundImageStyles.backgroundDetailContainer}>
                 <Grid item xs={3}>
                     <div sx={{
                         display: "flex",
