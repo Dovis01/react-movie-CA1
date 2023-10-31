@@ -4,14 +4,14 @@ import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner'
-import RemoveFromFavorites from "../components/cardIconAndAvatar/icons/removeFromFavorites";
 import WriteReview from "../components/cardIconAndAvatar/icons/writeReview";
+import RemoveFromWatchList from "../components/cardIconAndAvatar/icons/removeFromWatchList";
 
-const FavoriteMoviesPage = () => {
-    const {favorites: movieIds } = useContext(MoviesContext);
+const ToWatchMoviesListPage = () => {
+    const {toWatchList: movieIds } = useContext(MoviesContext);
 
     // Create an array of queries and run in parallel.
-    const favoriteMovieQueries = useQueries(
+    const toWatchListQueries = useQueries(
         movieIds.map((movieId) => {
             return {
                 queryKey: ["movie", { id: movieId }],
@@ -20,32 +20,32 @@ const FavoriteMoviesPage = () => {
         })
     );
     // Check if any of the parallel queries is still loading.
-    const isLoading = favoriteMovieQueries.find((m) => m.isLoading === true);
+    const isLoading = toWatchListQueries.find((m) => m.isLoading === true);
 
     if (isLoading) {
         return <Spinner />;
     }
-    //提取了流派ID为Movie一个单独的数组属性
-    const movies = favoriteMovieQueries.map((q) => {
+
+    const movies = toWatchListQueries.map((q) => {
         q.data.genre_ids = q.data.genres.map(g => g.id)
         return q.data
     });
 
     return (
         <PageTemplate
-            title="Favorite Movies"
+            title="Movies To Watch"
             movies={movies}
             action={(movie) => {
                 return (
                     <>
-                        <RemoveFromFavorites movie={movie} />
+                        <RemoveFromWatchList movie={movie} />
                         <WriteReview movie={movie} />
                     </>
                 );
             }}
-            avatarCheck={() => {}} //no avatar for favorite movies
+            avatarCheck={() => {}}
         />
     );
 };
 
-export default FavoriteMoviesPage;
+export default ToWatchMoviesListPage;

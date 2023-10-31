@@ -3,7 +3,8 @@ import { getMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToFavoritesIcon from '../components/cardIconAndAvatar/icons/addToFavorites'
+import AvatarFavoriteCheck from '../components/cardIconAndAvatar/avatar/favoritesCheck'
 
 const HomePage = () => {
 
@@ -28,6 +29,9 @@ const HomePage = () => {
             movies={movies}
             action={(movie) => {
                 return <AddToFavoritesIcon movie={movie} />
+            }}
+            avatarCheck={(movie) => {
+                return <AvatarFavoriteCheck movie={movie} />
             }}
         />
     );

@@ -1,10 +1,12 @@
 import React from "react";
 import {getUpcomingMovies} from "../api/tmdb-api";
 import PageTemplate from "../components/templateMovieListPage";
-import AddToFavorites from "../components/cardIcons/addToFavorites";
-import AddToWatchList from "../components/cardIcons/addToWatchList";
+import AddToFavorites from "../components/cardIconAndAvatar/icons/addToFavorites";
+import AddToWatchList from "../components/cardIconAndAvatar/icons/addToWatchList";
 import {useQuery} from "react-query";
 import Spinner from "../components/spinner";
+import AvatarFavoriteCheck from "../components/cardIconAndAvatar/avatar/favoritesCheck";
+import AvatarToWatchListCheck from "../components/cardIconAndAvatar/avatar/toWatchListCheck";
 
 const UpcomingMoviesPage = () => {
     //have done for using react-query
@@ -32,6 +34,14 @@ const UpcomingMoviesPage = () => {
                     <>
                         <AddToFavorites movie={movie}/>
                         <AddToWatchList movie={movie}/>
+                    </>
+                );
+            }}
+            avatarCheck={(movie) => {
+                return (
+                    <>
+                        <AvatarFavoriteCheck movie={movie} />
+                        <AvatarToWatchListCheck movie={movie} />
                     </>
                 );
             }}

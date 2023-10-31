@@ -1,4 +1,4 @@
-import React, { useContext  } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -6,33 +6,20 @@ import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import {Link} from "react-router-dom";
-import Avatar from '@mui/material/Avatar';
-import { MoviesContext } from "../../contexts/moviesContext";
 import backgroundImageStyles from "../../theme/background";
 
-export default function MovieCard({ movie, action }) {
-    const { favorites } = useContext(MoviesContext);
+export default function MovieCard({ movie, action ,avatarCheck}) {
 
-    if (favorites.find((id) => id === movie.id)) {
-        movie.favorite = true;
-    } else {
-        movie.favorite = false
-    }
     return (
         <Card sx={{ maxWidth: 345 }} elevation={5} style={backgroundImageStyles.backgroundCardContainer}>
             <CardHeader
                 avatar={
-                    movie.favorite ? (
-                        <Avatar sx={{ backgroundColor: 'red' }}>
-                            <FavoriteIcon />
-                        </Avatar>
-                    ) : null
+                    avatarCheck(movie)
                 }
                 title={
                     <Typography variant="h5" component="p">

@@ -5,7 +5,7 @@ import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
 import backgroundImageStyles from "../../theme/background";
 
-function MovieListPageTemplate({movies, title, action}) {
+function MovieListPageTemplate({movies, title, action, avatarCheck}) {
     const [nameFilter, setNameFilter] = useState("");
     const [genreFilter, setGenreFilter] = useState("0");
     const genreId = Number(genreFilter);
@@ -37,7 +37,7 @@ function MovieListPageTemplate({movies, title, action}) {
                             genreFilter={genreFilter}
                         />
                     </Grid>
-                    <MovieList action={action} movies={displayedMovies}></MovieList>
+                    <MovieList action={action} movies={displayedMovies} avatarCheck={avatarCheck}></MovieList>
                 </Grid>
             </Grid>
     );
