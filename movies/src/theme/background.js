@@ -6,7 +6,11 @@ const backgroundImageStyles = {
         backgroundImage: `url(${backgroundMainImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        width: '100%',
         zIndex: -1,
+        position: 'absolute',
+        right: 0,
+        left: 0,
     },
     backgroundCardContainer: {
         backgroundImage: `url(${backgroundCardImage})`,

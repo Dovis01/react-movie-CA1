@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { getMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
@@ -7,8 +7,11 @@ import AddToFavoritesIcon from '../components/cardIconAndAvatar/icons/addToFavor
 import AvatarFavoriteCheck from '../components/cardIconAndAvatar/avatar/favoritesCheck'
 
 const HomePage = () => {
-
-    const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
+    const [currentPage, setCurrentPage] = useState(1);
+    const {  data, error, isLoading, isError }  = useQuery(
+        ['discover',{page:currentPage}],
+        getMovies
+    )
 
     if (isLoading) {
         return <Spinner />
@@ -27,6 +30,9 @@ const HomePage = () => {
         <PageTemplate
             title="Discover Movies"
             movies={movies}
+            currentPage={currentPage}
+            nextPage={() => setCurrentPage(currentPage + 1)}
+            previousPage={() => setCurrentPage(currentPage - 1)}
             action={(movie) => {
                 return <AddToFavoritesIcon movie={movie} />
             }}

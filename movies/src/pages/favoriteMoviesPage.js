@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, {useContext, useState} from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
@@ -8,11 +8,18 @@ import RemoveFromFavorites from "../components/cardIconAndAvatar/icons/removeFro
 import WriteReview from "../components/cardIconAndAvatar/icons/writeReview";
 
 const FavoriteMoviesPage = () => {
+    const [currentPage, setCurrentPage] = useState(1);
     const {favorites: movieIds } = useContext(MoviesContext);
+
+    const moviesPerPage = 20;
+
+    const indexOfLastMovie = currentPage * moviesPerPage;
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+    const currentMoviesIds = movieIds.slice(indexOfFirstMovie, indexOfLastMovie);
 
     // Create an array of queries and run in parallel.
     const favoriteMovieQueries = useQueries(
-        movieIds.map((movieId) => {
+        currentMoviesIds.map((movieId) => {
             return {
                 queryKey: ["movie", { id: movieId }],
                 queryFn: getMovie,
@@ -35,6 +42,9 @@ const FavoriteMoviesPage = () => {
         <PageTemplate
             title="Favorite Movies"
             movies={movies}
+            currentPage={currentPage}
+            nextPage={() => setCurrentPage(currentPage + 1)}
+            previousPage={() => setCurrentPage(currentPage - 1)}
             action={(movie) => {
                 return (
                     <>
