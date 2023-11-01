@@ -25,14 +25,17 @@ const UpcomingMoviesPage = () => {
     }
 
     const movies = data.results;
+    const totalPages = data.total_pages;
 
     return (
         <PageTemplate
             title="Upcoming Movies"
             movies={movies}
             currentPage={currentPage}
-            nextPage={() => setCurrentPage(currentPage + 1)}
-            previousPage={() => setCurrentPage(currentPage - 1)}
+            totalPages={totalPages}
+            pageChange={(event, value) => {
+                setCurrentPage(value);
+            }}
             action={(movie) => {
                 return (
                     <>

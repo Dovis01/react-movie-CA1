@@ -21,6 +21,7 @@ const HomePage = () => {
         return <h1>{error.message}</h1>
     }
     const movies = data.results;
+    const totalPages = data.total_pages;
 
     // Redundant, but necessary to avoid app crashing.
     const favorites = movies.filter(m => m.favorite)
@@ -31,8 +32,10 @@ const HomePage = () => {
             title="Discover Movies"
             movies={movies}
             currentPage={currentPage}
-            nextPage={() => setCurrentPage(currentPage + 1)}
-            previousPage={() => setCurrentPage(currentPage - 1)}
+            totalPages={totalPages}
+            pageChange={(event, value) => {
+                setCurrentPage(value);
+            }}
             action={(movie) => {
                 return <AddToFavoritesIcon movie={movie} />
             }}

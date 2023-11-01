@@ -4,14 +4,11 @@ import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
 import backgroundImageStyles from "../../theme/background";
-import IconButton from "@mui/material/IconButton";
-import LastPageRoundedIcon from '@mui/icons-material/LastPageRounded';
-import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded';
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import {Pagination, Stack} from "@mui/material";
 
 
-function MovieListPageTemplate({movies, title, action, avatarCheck, nextPage, previousPage, currentPage}) {
+function MovieListPageTemplate({movies, title, action, avatarCheck, pageChange, currentPage,totalPages}) {
     const [nameFilter, setNameFilter] = useState("");
     const [genreFilter, setGenreFilter] = useState("0");
     const genreId = Number(genreFilter);
@@ -49,27 +46,18 @@ function MovieListPageTemplate({movies, title, action, avatarCheck, nextPage, pr
                 component="div"
                 sx={{
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: 'center',
-                    flexWrap: "nowrap",
-                    padding: 0,
-                    marginBottom: 0,
                     marginTop: 2.0,
                     left: '50%',
                     transform: 'translateX(-50%)',
                     zIndex: 1000,
                     position: 'relative',
+                    padding: 1.1,
                 }}
             >
-                <IconButton aria-label="go previous page" onClick={previousPage} disabled={currentPage === 1}>
-                    <FirstPageRoundedIcon color="primary" fontSize="large"/>
-                </IconButton>
-                <Typography variant="h5" sx={{alignSelf: 'center'}}>
-                    {currentPage}
-                </Typography>
-                <IconButton aria-label="go next page" onClick={nextPage} disabled={movies.length < 20}>
-                    <LastPageRoundedIcon  color="primary" fontSize="large" />
-                </IconButton>
+                <Stack spacing={2}>
+                    <Pagination count={totalPages} page={currentPage} onChange={pageChange} variant="outlined"
+                                shape="rounded" size="large" boundaryCount={2} showFirstButton showLastButton/>
+                </Stack>
             </Paper>
         </Grid>
     );

@@ -16,6 +16,7 @@ const ToWatchMoviesListPage = () => {
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
     const currentMoviesIds = movieIds.slice(indexOfFirstMovie, indexOfLastMovie);
+    const totalPages = Math.ceil(movieIds.length / moviesPerPage);
 
     // Create an array of queries and run in parallel.
     const toWatchListQueries = useQueries(
@@ -43,8 +44,10 @@ const ToWatchMoviesListPage = () => {
             title="Movies To Watch"
             movies={movies}
             currentPage={currentPage}
-            nextPage={() => setCurrentPage(currentPage + 1)}
-            previousPage={() => setCurrentPage(currentPage - 1)}
+            totalPages={totalPages}
+            pageChange={(event, value) => {
+                setCurrentPage(value);
+            }}
             action={(movie) => {
                 return (
                     <>

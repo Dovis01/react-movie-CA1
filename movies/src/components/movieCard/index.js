@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import StackedLineChartIcon from '@mui/icons-material/StackedLineChart';
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import {Link} from "react-router-dom";
@@ -45,10 +46,18 @@ export default function MovieCard({movie, action, avatarCheck}) {
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
+                        <Typography variant="h6" component="p" style={{whiteSpace: 'nowrap'}}>
+                            <Box component="span" ml={3}>
+                                <StackedLineChartIcon fontSize="medium"/>
+                                {" "} {movie.popularity.toFixed(2)}{" "}
+                            </Box>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
                         <Typography variant="h6" component="p">
-                            <Box component="span" ml={5}>
+                            <Box component="span" ml={1}>
                                 <StarRateIcon fontSize="small"/>
-                                {" "} {movie.vote_average}{" "}
+                                {" "} {movie.vote_average.toFixed(1)}{" "}
                             </Box>
                         </Typography>
                     </Grid>
