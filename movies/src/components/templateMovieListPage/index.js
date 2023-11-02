@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
@@ -12,23 +12,48 @@ function MovieListPageTemplate({movies, title, action, avatarCheck, pageChange, 
     const [nameFilter, setNameFilter] = useState("");
     const [genreFilter, setGenreFilter] = useState("0");
     const [releaseYearFilter, setReleaseYearFilter] = useState("");
+    const [sortOrder, setSortOrder] = useState("");
+    const [sortOption, setSortOption] = useState("");
+    const [displayedMovies, setDisplayedMovies] = useState(movies);
     const genreId = Number(genreFilter);
-
-    let displayedMovies = movies
-        .filter((m) => {
-            return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
-        })
-        .filter((m) => {
-            return m.release_date.substring(0,4).search(releaseYearFilter) !== -1;
-        })
-        .filter((m) => {
-            return genreId > 0 ? m.genre_ids.includes(genreId) : true;
-        });
 
     const handleChange = (type, value) => {
         if (type === "name") setNameFilter(value);
         else if (type === "year") setReleaseYearFilter(value);
+        else if (type === "sort") setSortOption(value);
+        else if (type === "sortOrder") setSortOrder(value);
         else setGenreFilter(value);
+    };
+
+    useEffect(() => {
+        let processedMovies = movies
+            .filter(m => m.title.toLowerCase().includes(nameFilter.toLowerCase()))
+            .filter(m => m.release_date.substring(0, 4).includes(releaseYearFilter))
+            .filter(m => (genreId > 0 ? m.genre_ids.includes(genreId) : true));
+
+        if (sortOption === "popularity" && sortOrder !== "none" && sortOrder) {
+            processedMovies = processedMovies.sort((a, b) => {
+                return sortOrder === 'desc' ? b.popularity - a.popularity : a.popularity - b.popularity;
+            });
+        } else if (sortOption === "vote_average" && sortOrder !== "none" && sortOrder) {
+            processedMovies = processedMovies.sort((a, b) => {
+                return sortOrder === 'desc' ? b.vote_average - a.vote_average : a.vote_average - b.vote_average;
+            });
+        }
+        setDisplayedMovies(processedMovies);
+    },  [movies, nameFilter, releaseYearFilter, genreId, sortOption, sortOrder]);
+
+
+    const selectSortOption = (selectedOption) => {
+        if (selectedOption === "none") {
+            setSortOption(null);
+        }
+    };
+
+    const selectSortOrder = (selectedOrder) => {
+        if (selectedOrder === "none") {
+            setSortOrder(null);
+        }
     };
 
     return (
@@ -42,6 +67,10 @@ function MovieListPageTemplate({movies, title, action, avatarCheck, pageChange, 
                         onUserInput={handleChange}
                         titleFilter={nameFilter}
                         genreFilter={genreFilter}
+                        sortOption={sortOption}
+                        sortOrder={sortOrder}
+                        selectSortOption={selectSortOption}
+                        selectSortOrder={selectSortOrder}
                         releaseYearFilter={releaseYearFilter}
                     />
                 </Grid>
