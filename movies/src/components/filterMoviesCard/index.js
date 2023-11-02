@@ -42,13 +42,16 @@ export default function FilterMoviesCard(props) {
         props.onUserInput(type, value); // NEW
     };
 
-    const handleTextChange = (e, props) => {
+    const handleTextChange = (e) => {
         handleChange(e, "name", e.target.value);
     };
 
     const handleGenreChange = (e) => {
         handleChange(e, "genre", e.target.value);
     };
+    const handleReleaseYearChange = (e) => {
+        handleChange(e, "year", e.target.value);
+    }
 
     return (
         <Card
@@ -65,7 +68,7 @@ export default function FilterMoviesCard(props) {
                 <TextField
                     sx={{...formControl}}
                     id="filled-search"
-                    label="Search field"
+                    label="Search movie name"
                     type="search"
                     variant="filled"
                     value={props.titleFilter}
@@ -89,6 +92,15 @@ export default function FilterMoviesCard(props) {
                         })}
                     </Select>
                 </FormControl>
+                <TextField
+                    sx={{...formControl}}
+                    id="release-year-search"
+                    label="Search release year"
+                    type="search"
+                    variant="filled"
+                    value={props.releaseYearFilter}
+                    onChange={handleReleaseYearChange}
+                />
             </CardContent>
             <CardMedia
                 sx={{ height: 300 }}

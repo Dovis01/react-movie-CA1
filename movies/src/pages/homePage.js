@@ -20,6 +20,7 @@ const HomePage = () => {
     if (isError) {
         return <h1>{error.message}</h1>
     }
+
     const movies = data.results;
     const totalPages = data.total_pages;
 

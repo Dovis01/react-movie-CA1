@@ -11,7 +11,7 @@ const ToWatchMoviesListPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const {toWatchList: movieIds } = useContext(MoviesContext);
 
-    const moviesPerPage = 20;
+    const moviesPerPage = 40;
 
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
