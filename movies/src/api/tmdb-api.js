@@ -142,3 +142,40 @@ export const getUpcomingMovies = (args) => {
             throw error;
         });
 };
+
+
+export const getNowPlayingMovies = (args) => {
+    const [, pagePart] = args.queryKey;
+    const {page} = pagePart;
+
+    const pageLast = page * 2;
+    const pageFirst = pageLast - 1;
+
+    return Promise.all([
+        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageFirst}`),
+        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${pageLast}`)
+    ])
+        .then(responses => {
+            for (const response of responses) {
+                if (!response.ok) {
+                    throw new Error('Problem fetching movies');
+                }
+            }
+            return Promise.all(responses.map(response => response.json()));
+        })
+        .then(data => {
+            const moviesPage1 = data[0].results || [];
+            const moviesPage2 = data[1].results || [];
+            const combinedMovies = [...moviesPage1, ...moviesPage2];
+
+            return {
+                page: pageFirst,
+                results: combinedMovies,
+                total_results: 2003,
+                total_pages: 51
+            };
+        })
+        .catch((error) => {
+            throw error;
+        });
+};
