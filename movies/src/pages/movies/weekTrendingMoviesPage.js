@@ -1,19 +1,19 @@
 import React, {useState} from "react";
-import {getNowPlayingMovies} from "../api/tmdb-api";
-import PageTemplate from "../components/templateMovieListPage";
-import AddToFavorites from "../components/cardIconAndAvatar/icons/addToFavorites";
-import AddToWatchList from "../components/cardIconAndAvatar/icons/addToWatchList";
+import {getWeekTrendingMovies} from "../../api/tmdb-api";
+import PageTemplate from "../../components/templateMovieListPage";
+import AddToFavorites from "../../components/cardIconAndAvatar/icons/addToFavorites";
+import AddToWatchList from "../../components/cardIconAndAvatar/icons/addToWatchList";
 import {useQuery} from "react-query";
-import Spinner from "../components/spinner";
-import AvatarFavoriteCheck from "../components/cardIconAndAvatar/avatar/favoritesCheck";
-import AvatarToWatchListCheck from "../components/cardIconAndAvatar/avatar/toWatchListCheck";
+import Spinner from "../../components/spinner";
+import AvatarFavoriteCheck from "../../components/cardIconAndAvatar/avatar/favoritesCheck";
+import AvatarToWatchListCheck from "../../components/cardIconAndAvatar/avatar/toWatchListCheck";
 
-const NowPlayingMoviesPage = () => {
+const WeekTrendingMoviesPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     //have done for using react-query
     const {data, error, isLoading, isError} = useQuery(
-        ["nowPlaying",{page:currentPage}],
-        getNowPlayingMovies
+        ["weekTrending",{page:currentPage}],
+        getWeekTrendingMovies
     );
 
     if (isLoading) {
@@ -29,7 +29,7 @@ const NowPlayingMoviesPage = () => {
 
     return (
         <PageTemplate
-            title="Now Playing Movies"
+            title="Week Trending Movies"
             movies={movies}
             currentPage={currentPage}
             totalPages={totalPages}
@@ -56,4 +56,4 @@ const NowPlayingMoviesPage = () => {
     );
 };
 
-export default NowPlayingMoviesPage;
+export default WeekTrendingMoviesPage;

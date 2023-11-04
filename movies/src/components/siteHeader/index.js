@@ -29,11 +29,16 @@ const SiteHeader = () => {
     const menuOptions = [
         {label: "Home", path: "/"},
         {label: "Movies"},
+        {label: "People"},
         {label: "Personal"},
     ];
     const movieSubMenuOptions = [
         {label: "Upcoming", path: "/movies/upcoming"},
         {label: "NowPlaying", path: "/movies/nowplaying"},
+        {label: "Week Trending", path: "/movies/weektrending"},
+    ];
+    const peopleSubMenuOptions = [
+        {label: "Popular people", path: "/people/popular"},
     ];
     const personalSubMenuOptions = [
         {label: "Favorites", path: "/movies/favorites"},
@@ -185,6 +190,49 @@ const SiteHeader = () => {
                                                     )}
                                                 </div>
                                             );
+                                        } else if (opt.label === "People") {
+                                            return (
+                                                <div
+                                                    key={opt.label}
+                                                >
+                                                    <Button
+                                                        color="inherit"
+                                                        onClick={(event) => handleMobileMenu('People', event)}
+                                                    >
+                                                        {opt.label}
+                                                    </Button>
+                                                    {activeSubMenu === 'People' && (
+                                                        <Menu
+                                                            id="menu-appbar"
+                                                            anchorEl={mobileSubAnchorEl}
+                                                            anchorOrigin={{
+                                                                vertical: "top",
+                                                                horizontal: "left",
+                                                            }}
+                                                            keepMounted
+                                                            transformOrigin={{
+                                                                vertical: "top",
+                                                                horizontal: "right",
+                                                            }}
+                                                            open={mobileSubOpen}
+                                                            onClose={handleSubMenuClose}
+                                                            autoFocus={false}
+                                                        >
+                                                            {peopleSubMenuOptions.map((subOpt) => (
+                                                                <MenuItem
+                                                                    key={subOpt.label}
+                                                                    onClick={() => {
+                                                                        handleMenuSelect(subOpt.path);
+                                                                        handleSubMenuClose();
+                                                                    }}
+                                                                >
+                                                                    {subOpt.label}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Menu>
+                                                    )}
+                                                </div>
+                                            );
                                         } else {
                                             return (
                                                 <Button
@@ -297,6 +345,52 @@ const SiteHeader = () => {
                                                 )}
                                             </div>
                                         );
+                                    } else if (opt.label === "People") {
+                                        return (
+                                            <div
+                                                key={opt.label}
+                                                onMouseLeave={handleSubMenuClose}
+                                                style={{display: 'inline-block'}}
+                                            >
+                                                <Button
+                                                    color="inherit"
+                                                    style={{marginRight: '10px'}}
+                                                    onMouseEnter={(event) => handleMenu('People', event)}
+                                                >
+                                                    {opt.label}
+                                                </Button>
+                                                {activeSubMenu === 'People' && (
+                                                    <Menu
+                                                        id="menu-appbar"
+                                                        anchorEl={anchorEl}
+                                                        anchorOrigin={{
+                                                            vertical: "bottom",
+                                                            horizontal: "left",
+                                                        }}
+                                                        keepMounted
+                                                        transformOrigin={{
+                                                            vertical: "top",
+                                                            horizontal: "left",
+                                                        }}
+                                                        open={open}
+                                                        onClose={handleSubMenuClose}
+                                                        autoFocus={false}
+                                                    >
+                                                        {peopleSubMenuOptions.map((subOpt) => (
+                                                            <MenuItem
+                                                                key={subOpt.label}
+                                                                onClick={() => {
+                                                                    handleMenuSelect(subOpt.path);
+                                                                    handleSubMenuClose();
+                                                                }}
+                                                            >
+                                                                {subOpt.label}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Menu>
+                                                )}
+                                            </div>
+                                        );
                                     } else {
                                         return (
                                             <Button
@@ -319,5 +413,4 @@ const SiteHeader = () => {
         </>
     );
 };
-
 export default SiteHeader;

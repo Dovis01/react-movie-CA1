@@ -1,15 +1,15 @@
 import React, {useContext, useState} from "react";
-import PageTemplate from "../components/templateMovieListPage";
-import { MoviesContext } from "../contexts/moviesContext";
+import PageTemplate from "../../components/templateMovieListPage";
+import { MoviesContext } from "../../contexts/moviesContext";
 import { useQueries } from "react-query";
-import { getMovie } from "../api/tmdb-api";
-import Spinner from '../components/spinner'
-import WriteReview from "../components/cardIconAndAvatar/icons/writeReview";
-import RemoveFromWatchList from "../components/cardIconAndAvatar/icons/removeFromWatchList";
+import { getMovie } from "../../api/tmdb-api";
+import Spinner from '../../components/spinner'
+import RemoveFromFavorites from "../../components/cardIconAndAvatar/icons/removeFromFavorites";
+import WriteReview from "../../components/cardIconAndAvatar/icons/writeReview";
 
-const ToWatchMoviesListPage = () => {
+const FavoriteMoviesPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const {toWatchList: movieIds } = useContext(MoviesContext);
+    const {favorites: movieIds } = useContext(MoviesContext);
 
     const moviesPerPage = 40;
 
@@ -19,7 +19,7 @@ const ToWatchMoviesListPage = () => {
     const totalPages = Math.ceil(movieIds.length / moviesPerPage);
 
     // Create an array of queries and run in parallel.
-    const toWatchListQueries = useQueries(
+    const favoriteMovieQueries = useQueries(
         currentMoviesIds.map((movieId) => {
             return {
                 queryKey: ["movie", { id: movieId }],
@@ -28,20 +28,20 @@ const ToWatchMoviesListPage = () => {
         })
     );
     // Check if any of the parallel queries is still loading.
-    const isLoading = toWatchListQueries.find((m) => m.isLoading === true);
+    const isLoading = favoriteMovieQueries.find((m) => m.isLoading === true);
 
     if (isLoading) {
         return <Spinner />;
     }
-
-    const movies = toWatchListQueries.map((q) => {
+    //提取了流派ID为Movie一个单独的数组属性
+    const movies = favoriteMovieQueries.map((q) => {
         q.data.genre_ids = q.data.genres.map(g => g.id)
         return q.data
     });
 
     return (
         <PageTemplate
-            title="Movies To Watch"
+            title="Favorite Movies"
             movies={movies}
             currentPage={currentPage}
             totalPages={totalPages}
@@ -51,14 +51,14 @@ const ToWatchMoviesListPage = () => {
             action={(movie) => {
                 return (
                     <>
-                        <RemoveFromWatchList movie={movie} />
+                        <RemoveFromFavorites movie={movie} />
                         <WriteReview movie={movie} />
                     </>
                 );
             }}
-            avatarCheck={() => {}}
+            avatarCheck={() => {}} //no avatar for favorite movies
         />
     );
 };
 
-export default ToWatchMoviesListPage;
+export default FavoriteMoviesPage;

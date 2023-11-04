@@ -1,19 +1,19 @@
 import React, {useState} from "react";
-import {getUpcomingMovies} from "../api/tmdb-api";
-import PageTemplate from "../components/templateMovieListPage";
-import AddToFavorites from "../components/cardIconAndAvatar/icons/addToFavorites";
-import AddToWatchList from "../components/cardIconAndAvatar/icons/addToWatchList";
+import {getNowPlayingMovies} from "../../api/tmdb-api";
+import PageTemplate from "../../components/templateMovieListPage";
+import AddToFavorites from "../../components/cardIconAndAvatar/icons/addToFavorites";
+import AddToWatchList from "../../components/cardIconAndAvatar/icons/addToWatchList";
 import {useQuery} from "react-query";
-import Spinner from "../components/spinner";
-import AvatarFavoriteCheck from "../components/cardIconAndAvatar/avatar/favoritesCheck";
-import AvatarToWatchListCheck from "../components/cardIconAndAvatar/avatar/toWatchListCheck";
+import Spinner from "../../components/spinner";
+import AvatarFavoriteCheck from "../../components/cardIconAndAvatar/avatar/favoritesCheck";
+import AvatarToWatchListCheck from "../../components/cardIconAndAvatar/avatar/toWatchListCheck";
 
-const UpcomingMoviesPage = () => {
+const NowPlayingMoviesPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     //have done for using react-query
     const {data, error, isLoading, isError} = useQuery(
-        ["upcoming",{page:currentPage}],
-        getUpcomingMovies
+        ["nowPlaying",{page:currentPage}],
+        getNowPlayingMovies
     );
 
     if (isLoading) {
@@ -29,7 +29,7 @@ const UpcomingMoviesPage = () => {
 
     return (
         <PageTemplate
-            title="Upcoming Movies"
+            title="Now Playing Movies"
             movies={movies}
             currentPage={currentPage}
             totalPages={totalPages}
@@ -56,4 +56,4 @@ const UpcomingMoviesPage = () => {
     );
 };
 
-export default UpcomingMoviesPage;
+export default NowPlayingMoviesPage;
