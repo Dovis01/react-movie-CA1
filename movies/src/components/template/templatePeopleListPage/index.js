@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "../headerMovieList";
+import Header from "../../headerMovieList";
 import Grid from "@mui/material/Grid";
-import backgroundImageStyles from "../../theme/background";
+import backgroundImageStyles from "../../../theme/background";
 import Paper from "@mui/material/Paper";
 import {Pagination, Stack} from "@mui/material";
-import PeopleList from "../peopleList";
+import PeopleList from "../../peopleList";
 
 function PeopleListPageTemplate({people, title, action, avatarCheck, pageChange, currentPage,totalPages}) {
 

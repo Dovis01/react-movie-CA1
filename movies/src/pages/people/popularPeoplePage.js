@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {getPopularPeople} from "../../api/tmdb-api";
-import PeoplePageTemplate from "../../components/templatePeopleListPage";
+import PeoplePageTemplate from "../../components/template/templatePeopleListPage";
 import {useQuery} from "react-query";
 import Spinner from "../../components/spinner";
 

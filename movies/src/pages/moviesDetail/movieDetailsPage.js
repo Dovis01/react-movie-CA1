@@ -1,10 +1,11 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
 import MovieDetails from "../../components/movieDetails";
-import PageTemplate from "../../components/templateMoviePage";
-import { getMovie } from '../../api/tmdb-api'
+import PageTemplate from "../../components/template/templateMoviePage";
+import {getMovie, getMovieCredits} from '../../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../../components/spinner'
+import MovieDetailActorCard from "../../components/movieDetailActorCard";
 
 
 const MoviePage = () => {
@@ -28,6 +29,7 @@ const MoviePage = () => {
                 <>
                     <PageTemplate movie={movie}>
                         <MovieDetails movie={movie} />
+                        <MovieDetailActorCard movie={movie}/>
                     </PageTemplate>
                 </>
             ) : (

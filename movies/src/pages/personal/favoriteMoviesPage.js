@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import PageTemplate from "../../components/templateMovieListPage";
+import PageTemplate from "../../components/template/templateMovieListPage";
 import { MoviesContext } from "../../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../../api/tmdb-api";

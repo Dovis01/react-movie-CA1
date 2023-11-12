@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {getWeekTrendingMovies} from "../../api/tmdb-api";
-import PageTemplate from "../../components/templateMovieListPage";
+import PageTemplate from "../../components/template/templateMovieListPage";
 import AddToFavorites from "../../components/cardIconAndAvatar/icons/addToFavorites";
 import AddToWatchList from "../../components/cardIconAndAvatar/icons/addToWatchList";
 import {useQuery} from "react-query";

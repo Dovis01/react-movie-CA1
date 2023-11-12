@@ -1,12 +1,12 @@
 import React from "react";
-import MovieHeader from "../headerMovie";
+import MovieHeader from "../../headerMovie";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getMovieImages } from "../../api/tmdb-api";
+import { getMovieImages } from "../../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
-import backgroundImageStyles from "../../theme/background";
+import Spinner from '../../spinner'
+import backgroundImageStyles from "../../../theme/background";
 
 const TemplateMoviePage = ({ movie, children }) => {
     const { data , error, isLoading, isError } = useQuery(
@@ -21,7 +21,7 @@ const TemplateMoviePage = ({ movie, children }) => {
     if (isError) {
         return <h1>{error.message}</h1>;
     }
-    const images = data.posters;
+    const images = data.posters.slice(0, 4);
 
     return (
         <>

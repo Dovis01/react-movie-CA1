@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import Header from "../headerMovieList";
-import FilterCard from "../filterMoviesCard";
-import MovieList from "../movieList";
+import Header from "../../headerMovieList";
+import FilterCard from "../../filterMoviesCard";
+import MovieList from "../../movieList";
 import Grid from "@mui/material/Grid";
-import backgroundImageStyles from "../../theme/background";
+import backgroundImageStyles from "../../../theme/background";
 import Paper from "@mui/material/Paper";
 import {Pagination, Stack} from "@mui/material";
 
