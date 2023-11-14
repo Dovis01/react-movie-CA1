@@ -264,13 +264,49 @@ export const getPopularPeople = (args) => {
             return Promise.all(responses.map(response => response.json()));
         })
         .then(data => {
-            const moviesPage1 = data[0].results || [];
-            const moviesPage2 = data[1].results || [];
-            const combinedMovies = [...moviesPage1, ...moviesPage2];
+            const peoplePage1 = data[0].results || [];
+            const peoplePage2 = data[1].results || [];
+            const combinedPeople = [...peoplePage1, ...peoplePage2];
 
             return {
                 page: pageFirst,
-                results: combinedMovies,
+                results: combinedPeople,
+                total_results: 10000,
+                total_pages: 250
+            };
+        })
+        .catch((error) => {
+            throw error;
+        });
+};
+
+export const getWeekTrendingPeople = (args) => {
+    const [, pagePart] = args.queryKey;
+    const {page} = pagePart;
+
+    const pageLast = page * 2;
+    const pageFirst = pageLast - 1;
+
+    return Promise.all([
+        fetch(`https://api.themoviedb.org/3/trending/person/week?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageFirst}`),
+        fetch(`https://api.themoviedb.org/3/trending/person/week?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageLast}`)
+    ])
+        .then(responses => {
+            for (const response of responses) {
+                if (!response.ok) {
+                    throw new Error('Problem fetching movies');
+                }
+            }
+            return Promise.all(responses.map(response => response.json()));
+        })
+        .then(data => {
+            const peoplePage1 = data[0].results || [];
+            const peoplePage2 = data[1].results || [];
+            const combinedPeople = [...peoplePage1, ...peoplePage2];
+
+            return {
+                page: pageFirst,
+                results: combinedPeople,
                 total_results: 10000,
                 total_pages: 250
             };

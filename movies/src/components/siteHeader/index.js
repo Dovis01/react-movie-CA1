@@ -34,11 +34,12 @@ const SiteHeader = () => {
     ];
     const movieSubMenuOptions = [
         {label: "Upcoming", path: "/movies/upcoming"},
-        {label: "NowPlaying", path: "/movies/nowplaying"},
+        {label: "Now Playing", path: "/movies/nowplaying"},
         {label: "Week Trending", path: "/movies/weektrending"},
     ];
     const peopleSubMenuOptions = [
         {label: "Popular people", path: "/people/popular"},
+        {label: "Week Trending", path: "/people/weektrending"},
     ];
     const personalSubMenuOptions = [
         {label: "Favorites", path: "/movies/favorites"},

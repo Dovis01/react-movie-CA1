@@ -18,6 +18,7 @@ import WeekTrendingMoviesPage from "./pages/movies/weekTrendingMoviesPage";
 import PopularPeoplePage from "./pages/people/popularPeoplePage";
 import {DevSupport} from "@react-buddy/ide-toolbox";
 import {ComponentPreviews, useInitial} from "./dev";
+import WeekTrendingPeoplePage from "./pages/people/weekTrendingPeoplePage";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -37,6 +38,7 @@ const App = () => {
                 <MoviesContextProvider>
                     <Routes>
                         <Route path="/people/popular" element={<PopularPeoplePage/>}/>
+                        <Route path="/people/weektrending" element={<WeekTrendingPeoplePage/>}/>
                         <Route path="/people/popular/:id" element={<PeopleDetailsPage/>}/>
                         <Route path="/reviews/form" element={<AddMovieReviewPage/>}/>
                         <Route path="/movies/upcoming" element={<UpcomingMoviesPage/>}/>
