@@ -244,6 +244,42 @@ export const getWeekTrendingMovies = (args) => {
         });
 };
 
+export const getMovieRecommendations = (args) => {
+    const [, pageIdPart] = args.queryKey;
+    const {page,id} = pageIdPart;
+
+    const pageLast = page * 2;
+    const pageFirst = pageLast - 1;
+
+    return Promise.all([
+        fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageFirst}`),
+        fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${pageLast}`)
+    ])
+        .then(responses => {
+            for (const response of responses) {
+                if (!response.ok) {
+                    throw new Error('Problem fetching movies');
+                }
+            }
+            return Promise.all(responses.map(response => response.json()));
+        })
+        .then(data => {
+            const moviesPage1 = data[0].results || [];
+            const moviesPage2 = data[1].results || [];
+            const combinedMovies = [...moviesPage1, ...moviesPage2];
+
+            return {
+                page: pageFirst,
+                results: combinedMovies,
+                total_results: combinedMovies.length,
+                total_pages: Math.floor(combinedMovies.length/40)+1
+            };
+        })
+        .catch((error) => {
+            throw error;
+        });
+};
+
 export const getPopularPeople = (args) => {
     const [, pagePart] = args.queryKey;
     const {page} = pagePart;

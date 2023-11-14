@@ -9,6 +9,8 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
 
 
 const root = {
@@ -72,6 +74,16 @@ const MovieDetails = ({movie}) => {
                         <Chip label={country.name} sx={{...chip}}/>
                     </li>
                 ))}
+            </Paper>
+            <Paper component="ul" sx={{...root}}>
+                <Link to={`/movies/${movie.id}/recommendations`}>
+                    <Button variant="contained" size="medium" color="primary" sx={{
+                        borderRadius: '20px', // 增加borderRadius以获得椭圆形的按钮
+                        marginBottom: '1em',  // 增加marginBottom以增加下间距
+                    }}>
+                        More Movie Recommendations ...
+                    </Button>
+                </Link>
             </Paper>
 
             <Fab

@@ -19,6 +19,7 @@ import PopularPeoplePage from "./pages/people/popularPeoplePage";
 import {DevSupport} from "@react-buddy/ide-toolbox";
 import {ComponentPreviews, useInitial} from "./dev";
 import WeekTrendingPeoplePage from "./pages/people/weekTrendingPeoplePage";
+import MovieRecommendationsPage from "./pages/movies/movieRecommendationsPage";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -48,6 +49,7 @@ const App = () => {
                         <Route path="/movies/watchlist" element={<ToWatchMoviesListPage/>}/>
                         <Route path="/reviews/:id" element={<MovieReviewPage/>}/>
                         <Route path="/movies/:id" element={<MoviePage/>}/>
+                        <Route path="/movies/:id/recommendations" element={<MovieRecommendationsPage/>}/>
                         <Route path="/" element={<HomePage/>}/>
                         <Route path="*" element={<Navigate to="/"/>}/>
                     </Routes>

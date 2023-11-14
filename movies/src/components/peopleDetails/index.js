@@ -1,10 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import NavigationIcon from "@mui/icons-material/Navigation";
-import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
-import Drawer from "@mui/material/Drawer";
 import Woman2OutlinedIcon from "@mui/icons-material/Woman2Outlined";
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import CakeIcon from '@mui/icons-material/Cake';
@@ -22,8 +19,6 @@ const root = {
 const chip = {margin: 0.5};
 
 const PeopleDetails = ({actor}) => {
-    const [drawerOpen, setDrawerOpen] = useState(false);
-
     return (
         <>
             <Typography variant="h5" component="h3">
@@ -78,23 +73,6 @@ const PeopleDetails = ({actor}) => {
                     )}
                 </li>
             </Paper>
-
-            <Fab
-                color="secondary"
-                variant="extended"
-                onClick={() => setDrawerOpen(true)}
-                sx={{
-                    position: 'fixed',
-                    bottom: '1em',
-                    right: '1em'
-                }}
-            >
-                <NavigationIcon/>
-                Reviews
-            </Fab>
-            <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                {/*<MovieReviews actor={actor}/>*/}
-            </Drawer>
         </>
     );
 };
