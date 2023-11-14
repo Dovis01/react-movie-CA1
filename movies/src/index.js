@@ -3,6 +3,7 @@ import {createRoot} from "react-dom/client";
 import {BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/moviesDetail/movieDetailsPage";
+import PeopleDetailsPage from "./pages/peopleDetail/peopleDetailsPage";
 import FavoriteMoviesPage from "./pages/personal/favoriteMoviesPage";
 import UpcomingMoviesPage from "./pages/movies/upcomingMoviesPage";
 import NowPlayingMoviesPage from "./pages/movies/nowPlayingMoviesPage";
@@ -36,7 +37,7 @@ const App = () => {
                 <MoviesContextProvider>
                     <Routes>
                         <Route path="/people/popular" element={<PopularPeoplePage/>}/>
-                        <Route path="/people/popular/:id" element={<PopularPeoplePage/>}/>
+                        <Route path="/people/popular/:id" element={<PeopleDetailsPage/>}/>
                         <Route path="/reviews/form" element={<AddMovieReviewPage/>}/>
                         <Route path="/movies/upcoming" element={<UpcomingMoviesPage/>}/>
                         <Route path="/movies/nowplaying" element={<NowPlayingMoviesPage/>}/>

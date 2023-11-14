@@ -9,39 +9,66 @@ import Spinner from "../spinner";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import React, {useState} from "react";
 import {CardActionArea, Dialog} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
+import {useNavigate} from "react-router-dom";
+
+
 
 const ActorCard = ({actor}) => {
+    const navigate = useNavigate();
+    const actorDetailUrl = `/people/popular/${actor.id}`;
+    const handleActorClick = (pageURL) => {
+        navigate(pageURL);
+    };
     return (
         <Card sx={{width: 196, m: 2, height: '100%'}}>
-            <CardMedia
-                component="img"
-                height="260"
-                image={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
-                alt={actor.name}
-            />
-            <CardContent sx={{height: 90}}>
-                <Typography gutterBottom variant="h6" component="div">
-                    {actor.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {actor.character}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {actor.known_for_department}
-                </Typography>
-            </CardContent>
+            <CardActionArea onClick={() => handleActorClick(actorDetailUrl)}>
+                <CardMedia
+                    component="img"
+                    height="260"
+                    image={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                    alt={actor.name}
+                />
+                <CardContent sx={{height: 90}}>
+                    <Typography gutterBottom variant="h6" component="div">
+                        {actor.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {actor.character}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {actor.known_for_department}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
         </Card>
     );
 };
 
-const ActorList = ({actors}) => {
+const ActorScrollList = ({actors}) => {
     return (
         <Box sx={{
             display: 'flex',
             flexDirection: 'row',
             overflowX: 'auto',
             whiteSpace: 'nowrap',
+            // 添加这些样式来定制滚动条
+            '&::-webkit-scrollbar': {
+                height: '8px',  // 水平滚动条的高度
+            },
+            '&::-webkit-scrollbar-track': {
+                boxShadow: 'inset 0 0 5px grey',  // 滑道颜色
+                borderRadius: '10px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+                background: 'darkgrey',  // 滑块颜色
+                borderRadius: '10px',
+                '&:hover': {
+                    background: 'rgba(150,229,239,0.62)',  // 滑块悬停时的颜色
+                },
+            },
+            // 对于Firefox浏览器
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'darkgrey grey',
         }}>
             {actors.map((actor, index) => (
                 <Box
@@ -107,19 +134,17 @@ const MovieVideos = ({movie}) => {
                         open={open === video.id}
                         onClose={() => setOpen(null)}
                         aria-labelledby="video-dialog-title"
-                        maxWidth="lg"
+                        maxWidth="xl"
+                        fullWidth={true}
                     >
-                        <video
-                            controls
-                            autoPlay
-                            muted
+                        <iframe
+                            width="100%"
+                            height="900"
                             src={`https://www.youtube.com/embed/${video.key}`}
-                            style={{
-                                width: '100%', // 视频播放器宽度占满整个对话框宽度
-                                height: 'auto', // 高度自动调整
-                                maxHeight: 'calc(100vh - 100px)', // 最大高度取决于视口高度，减去一些空间以防止溢出
-                            }}
-                        />
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
                     </Dialog>
                 </div>
             ))}
@@ -140,11 +165,11 @@ export default function MovieDetailActorCard({movie}) {
     if (isError) {
         return <h1>{error.message}</h1>;
     }
-    const actors = [...data.cast.slice(0, 6)];
+    const actors = [...data.cast];
 
     return (
         <>
-            <ActorList actors={actors}/>
+            <ActorScrollList actors={actors}/>
             <br/>
             <MovieVideos movie={movie}/>
         </>

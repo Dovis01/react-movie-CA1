@@ -20,8 +20,11 @@ const backgroundImageStyles = {
     },
     backgroundDetailContainer:{
         backgroundColor: 'rgba(219,232,240,0.7)',
-        zIndex: -10,
-        position: 'relative',
+        position: 'fixed', // 使用 fixed 而不是 absolute 以确保它覆盖整个屏幕
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
     },
 };
 

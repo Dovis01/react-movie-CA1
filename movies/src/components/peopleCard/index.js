@@ -75,7 +75,7 @@ export default function PeopleCard({people, action, avatarCheck}) {
             </CardContent>
             <CardActions disableSpacing>
                 {action(people)}
-                <Link to={`/peoples/popular/${people.id}`}>
+                <Link to={`/people/popular/${people.id}`}>
                     <Button variant="outlined" size="medium" color="primary" sx={{marginBottom:'25px',padding:'15px',marginLeft:'72px'}}>
                         More Info ...
                     </Button>

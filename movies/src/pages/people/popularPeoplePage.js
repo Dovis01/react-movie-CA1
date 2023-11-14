@@ -36,7 +36,6 @@ const PopularPeoplePage = () => {
             action={() => {
                 return (
                     <>
-
                     </>
                 );
             }}
