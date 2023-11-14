@@ -152,7 +152,7 @@ const MovieVideos = ({movie}) => {
     );
 }
 
-export default function MovieDetailActorCard({movie}) {
+export default function MovieDetailActorVideo({movie}) {
     const {data, error, isLoading, isError} = useQuery(
         ["movieCredits", {id: movie.id}],
         getMovieCredits

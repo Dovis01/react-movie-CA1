@@ -5,7 +5,7 @@ import PageTemplate from "../../components/template/templateMoviePage";
 import {getMovie} from '../../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../../components/spinner'
-import MovieDetailActorCard from "../../components/movieDetailActorCard";
+import MovieDetailActorVideo from "../../components/movieDetailActorVideo";
 
 
 const MoviePage = () => {
@@ -29,7 +29,7 @@ const MoviePage = () => {
                 <>
                     <PageTemplate movie={movie}>
                         <MovieDetails movie={movie} />
-                        <MovieDetailActorCard movie={movie} />
+                        <MovieDetailActorVideo movie={movie} />
                     </PageTemplate>
                 </>
             ) : (

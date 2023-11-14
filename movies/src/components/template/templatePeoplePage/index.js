@@ -25,7 +25,7 @@ const TemplatePeoplePage = ({actor, children}) => {
     if (isError) {
         return <h1>{error.message}</h1>;
     }
-    const images = data.profiles.slice(0, 2);
+    const images = data.profiles.slice(0, 3);
 
     return (
         <>

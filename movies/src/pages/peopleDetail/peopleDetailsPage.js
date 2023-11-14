@@ -5,8 +5,8 @@ import { getPopularPeopleDetail} from '../../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../../components/spinner'
 import PeopleDetails from "../../components/peopleDetails";
-
-
+import PeopleDetailMovieCredits from "../../components/peopleDetailMovieCredits";
+import PeopleDetailTVCredits from "../../components/peopleDetailTVCredits";
 
 const PeoplePage = () => {
     const { id } = useParams();
@@ -29,6 +29,8 @@ const PeoplePage = () => {
                 <>
                     <PeopleDetailPageTemplate actor={peopleDetail}>
                         <PeopleDetails actor={peopleDetail} />
+                        <PeopleDetailMovieCredits actor={peopleDetail} />
+                        <PeopleDetailTVCredits actor={peopleDetail} />
                     </PeopleDetailPageTemplate>
                 </>
             ) : (
