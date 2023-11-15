@@ -21,6 +21,7 @@ import {ComponentPreviews, useInitial} from "./dev";
 import WeekTrendingPeoplePage from "./pages/people/weekTrendingPeoplePage";
 import MovieRecommendationsPage from "./pages/movies/movieRecommendationsPage";
 import MovieRelatedPeoplePage from "./pages/people/movieRelatedPeoplePage";
+import ActorRelatedMoviesPage from "./pages/movies/actorRelatedMoviesPage";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -42,6 +43,7 @@ const App = () => {
                         <Route path="/people/popular" element={<PopularPeoplePage/>}/>
                         <Route path="/people/weektrending" element={<WeekTrendingPeoplePage/>}/>
                         <Route path="/people/popular/:id" element={<PeopleDetailsPage/>}/>
+                        <Route path="/people/popular/:id/related_movies" element={<ActorRelatedMoviesPage/>}/>
                         <Route path="/reviews/form" element={<AddMovieReviewPage/>}/>
                         <Route path="/movies/upcoming" element={<UpcomingMoviesPage/>}/>
                         <Route path="/movies/nowplaying" element={<NowPlayingMoviesPage/>}/>

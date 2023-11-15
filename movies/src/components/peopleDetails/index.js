@@ -7,6 +7,8 @@ import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import CakeIcon from '@mui/icons-material/Cake';
 import VillaIcon from '@mui/icons-material/Villa';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import {Link} from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const root = {
     display: "flex",
@@ -72,6 +74,17 @@ const PeopleDetails = ({actor}) => {
                         </>
                     )}
                 </li>
+            </Paper>
+            <Paper component="ul" sx={{...root}}>
+                <Link to={`/people/popular/${actor.id}/related_movies`}>
+                    <Button variant="contained" size="small" color="primary" sx={{
+                        borderRadius: '20px', // 增加borderRadius以获得椭圆形的按钮
+                        marginBottom: '1em',  // 增加marginBottom以增加下间距
+                        marginLeft: '1em',
+                    }}>
+                        Show All Related Movies ...
+                    </Button>
+                </Link>
             </Paper>
         </>
     );
