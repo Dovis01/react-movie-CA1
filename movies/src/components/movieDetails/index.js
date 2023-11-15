@@ -67,6 +67,31 @@ const MovieDetails = ({movie}) => {
             </Paper>
             <Paper component="ul" sx={{...root}}>
                 <li>
+                    <Chip label="Production Companies" sx={{...chip}} color="primary"/>
+                </li>
+                {movie.production_companies.map((company) => (
+                    <li key={company.name}>
+                        <Button
+                            variant="outlined"
+                            sx={{
+                                ...chip,
+                                borderRadius: '16px', // 保持椭圆形状
+                                color: 'grey',
+                                borderColor: 'grey',
+                                textTransform: 'none', // 防止字母大写
+                                '&:hover': {
+                                    borderColor: 'grey', // 鼠标悬停时边框颜色
+                                    backgroundColor: 'rgba(0, 0, 0, 0.08)' // 鼠标悬停时的背景颜色，根据需要调整
+                                }
+                            }}
+                        >
+                            {company.name}
+                        </Button>
+                    </li>
+                ))}
+            </Paper>
+            <Paper component="ul" sx={{...root}}>
+                <li>
                     <Chip label="Production Countries" sx={{...chip}} color="primary"/>
                 </li>
                 {movie.production_countries.map((country) => (
@@ -77,11 +102,20 @@ const MovieDetails = ({movie}) => {
             </Paper>
             <Paper component="ul" sx={{...root}}>
                 <Link to={`/movies/${movie.id}/recommendations`}>
-                    <Button variant="contained" size="medium" color="primary" sx={{
+                    <Button variant="contained" size="small" color="primary" sx={{
                         borderRadius: '20px', // 增加borderRadius以获得椭圆形的按钮
                         marginBottom: '1em',  // 增加marginBottom以增加下间距
                     }}>
                         More Movie Recommendations ...
+                    </Button>
+                </Link>
+                <Link to={`/movies/${movie.id}/related_actors`}>
+                    <Button variant="contained" size="small" color="primary" sx={{
+                        borderRadius: '20px', // 增加borderRadius以获得椭圆形的按钮
+                        marginBottom: '1em',  // 增加marginBottom以增加下间距
+                        marginLeft: '1em',
+                    }}>
+                        Show All Movie Related Credits ...
                     </Button>
                 </Link>
             </Paper>
