@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {auth, GoogleAuthProvider} from '../../firebase.js';
-import {signInWithPopup,createUserWithEmailAndPassword } from 'firebase/auth';
+import {signInWithPopup, createUserWithEmailAndPassword} from 'firebase/auth';
 import Button from "@mui/material/Button";
 import GoogleIcon from "@mui/icons-material/Google";
 import EmailIcon from '@mui/icons-material/Email';
 import TextField from "@mui/material/TextField";
+import Paper from "@mui/material/Paper";
 
 
 const provider = new GoogleAuthProvider();
@@ -65,20 +66,23 @@ const ThirdPartyAuthByEmail = () => {
                 fullWidth
                 margin="normal"
             />
-            <Button variant="contained" onClick={signUpWithEmail}>
-                <EmailIcon sx={{mr: 1}}/>
-                Sign in with Email
-            </Button>
+            <Paper sx={{ marginTop: '12px'}}>
+                <Button variant="contained" onClick={signUpWithEmail}>
+                    <EmailIcon sx={{mr: 1}}/>
+                    Sign in with Email
+                </Button>
+            </Paper>
         </>
     );
 };
 
-const ThirdPartyAuthLogIn = () => {
+const ThirdPartyAuthSignIn = () => {
     return (
         <>
             <ThirdPartyAuthByEmail/>
+            <br/>
             <ThirdPartyAuthByGoogle/>
         </>
     );
 }
-export default ThirdPartyAuthLogIn;
+export default ThirdPartyAuthSignIn;

@@ -2,16 +2,22 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import backgroundImageStyles from "../theme/background";
 import Header from "../components/headerMovieList";
-import ThirdPartyAuth from "../components/thirdPartyAuth";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
+import {useNavigate} from "react-router-dom";
 
 
 const LogInPage = () => {
     const title = "Log In Page";
+    const navigate = useNavigate();
+    const signInUrl = "/signin";
+    const handleSignInSelect = (pageURL) => {
+        navigate(pageURL);
+    };
+
     return (
         <Grid container sx={{padding: '20px', height: '92%'}} style={backgroundImageStyles.backgroundMainContainer}>
             <Grid item xs={12}>
@@ -34,7 +40,7 @@ const LogInPage = () => {
                             </Button>
                         </Paper>
                         <Paper sx={{margin: '10px', width: '100%', marginBottom: '20px',marginTop: '5px'}}>
-                            <Button type="submit" fullWidth variant="contained">
+                            <Button type="submit" fullWidth variant="contained" onClick={()=>handleSignInSelect(signInUrl)}>
                                 Sign In
                             </Button>
                         </Paper>
