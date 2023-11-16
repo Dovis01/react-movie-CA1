@@ -31,6 +31,7 @@ const SiteHeader = () => {
         {label: "Movies"},
         {label: "People"},
         {label: "Personal"},
+        {label: "Log in", path: "/login"},
     ];
     const movieSubMenuOptions = [
         {label: "Upcoming", path: "/movies/upcoming"},
