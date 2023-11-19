@@ -9,9 +9,9 @@ import MovieDetailActorVideo from "../../components/movieDetailActorVideo";
 
 
 const MoviePage = () => {
-    const { id } = useParams();
+    const { movieId } = useParams();
     const { data: movie, error, isLoading, isError } = useQuery(
-        ["movie", { id: id }],
+        ["movie", { id: movieId }],
         getMovie
     );
 

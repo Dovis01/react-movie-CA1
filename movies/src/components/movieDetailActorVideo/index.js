@@ -13,9 +13,9 @@ import {useNavigate} from "react-router-dom";
 
 
 
-const ActorCard = ({actor}) => {
+const ActorCard = ({actor,movie}) => {
     const navigate = useNavigate();
-    const actorDetailUrl = `/people/popular/${actor.id}`;
+    const actorDetailUrl = `/movie/${movie.id}/people/popular/${actor.id}`;
     const handleActorClick = (pageURL) => {
         navigate(pageURL);
     };
@@ -44,7 +44,7 @@ const ActorCard = ({actor}) => {
     );
 };
 
-const ActorScrollList = ({actors}) => {
+const ActorScrollList = ({actors,movie}) => {
     return (
         <Box sx={{
             display: 'flex',
@@ -75,7 +75,7 @@ const ActorScrollList = ({actors}) => {
                     key={actor.id} //使用 actor 的唯一标识作为 key
                     sx={{display: 'inline-flex', height: '100%'}} // 设置为内联Flex以保持对齐
                 >
-                    <ActorCard actor={actor}/>
+                    <ActorCard actor={actor} movie={movie}/>
                 </Box>
             ))}
         </Box>
@@ -169,7 +169,7 @@ export default function MovieDetailActorVideo({movie}) {
 
     return (
         <>
-            <ActorScrollList actors={actors}/>
+            <ActorScrollList actors={actors} movie={movie}/>
             <br/>
             <MovieVideos movie={movie}/>
         </>

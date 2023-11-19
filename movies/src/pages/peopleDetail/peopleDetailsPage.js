@@ -9,9 +9,9 @@ import PeopleDetailMovieCredits from "../../components/peopleDetailMovieCredits"
 import PeopleDetailTVCredits from "../../components/peopleDetailTVCredits";
 
 const PeoplePage = () => {
-    const { id } = useParams();
+    const { actorId } = useParams();
     const { data: peopleDetail, error, isLoading, isError } = useQuery(
-        ["popularPeopleDetails", { id: id }],
+        ["popularPeopleDetails", { id: actorId }],
         getPopularPeopleDetail
     );
 

@@ -14,9 +14,9 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 
 
-const MovieCreditsCard = ({movie}) => {
+const MovieCreditsCard = ({movie,actor}) => {
     const navigate = useNavigate();
-    const movieDetailUrl = `/movies/${movie.id}`;
+    const movieDetailUrl = `/people/popular/${actor.id}/movies/${movie.id}`;
     const handleMovieCreditsClick = (pageURL) => {
         navigate(pageURL);
     };
@@ -102,7 +102,7 @@ export default function PeopleDetailMovieCredits ({actor}) {
                     key={movie.id} //使用 movie 的唯一标识作为 key
                     sx={{display: 'inline-flex', height: '100%'}} // 设置为内联Flex以保持对齐
                 >
-                    <MovieCreditsCard movie={movie}/>
+                    <MovieCreditsCard movie={movie} actor={actor}/>
                 </Box>
             ))}
         </Box>

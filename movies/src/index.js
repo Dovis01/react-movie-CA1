@@ -44,7 +44,8 @@ const App = () => {
                     <Routes>
                         <Route path="/people/popular" element={<PopularPeoplePage/>}/>
                         <Route path="/people/weektrending" element={<WeekTrendingPeoplePage/>}/>
-                        <Route path="/people/popular/:id" element={<PeopleDetailsPage/>}/>
+                        <Route path="/people/popular/:actorId" element={<PeopleDetailsPage/>}/>
+                        <Route path="/movie/:movieId/people/popular/:actorId" element={<PeopleDetailsPage/>}/>
                         <Route path="/people/popular/:id/related_movies" element={<ActorRelatedMoviesPage/>}/>
                         <Route path="/reviews/form" element={<AddMovieReviewPage/>}/>
                         <Route path="/movies/upcoming" element={<UpcomingMoviesPage/>}/>
@@ -53,7 +54,8 @@ const App = () => {
                         <Route path="/movies/favorites" element={<FavoriteMoviesPage/>}/>
                         <Route path="/movies/watchlist" element={<ToWatchMoviesListPage/>}/>
                         <Route path="/reviews/:id" element={<MovieReviewPage/>}/>
-                        <Route path="/movies/:id" element={<MoviePage/>}/>
+                        <Route path="/movies/:movieId" element={<MoviePage/>}/>
+                        <Route path="/people/popular/:actorId/movies/:movieId" element={<MoviePage/>}/>
                         <Route path="/movies/:id/recommendations" element={<MovieRecommendationsPage/>}/>
                         <Route path="/movies/:id/related_actors" element={<MovieRelatedPeoplePage/>}/>
                         <Route path="/" element={<HomePage/>}/>
