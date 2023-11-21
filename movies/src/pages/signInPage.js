@@ -38,13 +38,11 @@ const SignInPage = () => {
             setSeverity('success');
             setOpenSnackbar(true);
         } catch (error) {
-            console.log(error);
-            // 登录失败，处理错误
             const errorCode = error.code;
-            if (errorCode === 'auth/user-not-found') {
-                setSnackMessage('No user found with this email.');
-            } else if (errorCode === 'auth/wrong-password') {
-                setSnackMessage('Incorrect password. Please try again.');
+            if (errorCode === 'auth/invalid-email') {
+                setSnackMessage('This email is invalid.');
+            } else if (errorCode === 'auth/invalid-login-credentials') {
+                setSnackMessage('Incorrect user email or password. Please try again.');
             } else {
                 setSnackMessage('Failed to log in. Please try again later.');
             }
