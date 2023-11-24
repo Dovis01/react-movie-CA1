@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import colorTheme from "../../theme/adjustColor";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import FormControl from "@mui/material/FormControl";
@@ -79,7 +80,7 @@ export default function FilterMoviesCard(props) {
         <Card
             sx={{
                 maxWidth: 345,
-                backgroundColor: "rgb(204, 204, 0)"
+                backgroundColor: colorTheme.palette.primary.dark
             }}
             variant="outlined">
             <CardContent>

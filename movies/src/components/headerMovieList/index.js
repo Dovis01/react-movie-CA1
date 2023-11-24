@@ -4,6 +4,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import colorTheme from "../../theme/adjustColor";
 import {useNavigate} from "react-router-dom";
 
 const Header = (props) => {
@@ -19,6 +20,7 @@ const Header = (props) => {
                 flexWrap: "wrap",
                 padding: 1.5,
                 marginBottom: 2.5,
+                bgcolor:colorTheme.palette.primary.light,
             }}
         >
             <IconButton aria-label="go back" onClick={() => navigate(-1)}>
