@@ -9,14 +9,6 @@ const MoviesContextProvider = (props) => {
     const [toWatchList, setToWatchList] = useState( [] )
     const [user, setUser] = useState(null);
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setUser(user);
-        } else {
-            setUser(null);
-        }
-    });
-
     const addToFavorites = (movie) => {
         let newFavorites = [];
         if (!favorites.includes(movie.id)){

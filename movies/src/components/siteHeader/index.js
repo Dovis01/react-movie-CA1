@@ -36,6 +36,7 @@ const SiteHeader = () => {
 
     useEffect(() => {
         return onAuthStateChanged(auth, (user) => {
+            context.addUser(user);
             setIsUserLoggedIn(!!user);
         });
     }, []);
@@ -101,7 +102,7 @@ const SiteHeader = () => {
 
     const userAuthButton = () => {
         if (isUserLoggedIn) {
-            if(user.displayName=== null){
+            if(user.displayName === null){
                 user.displayName = user.email;
             }
             return (
@@ -158,7 +159,7 @@ const SiteHeader = () => {
                 <ThemeProvider theme={colorTheme}>
                     <AppBar position="fixed" color="primary" elevation={8} sx={{padding: 0.75}}>
                         <Toolbar>
-                            <Typography variant="h4" sx={{flexGrow: 1}}>
+                            <Typography variant="h4" sx={{ flexGrow: 1, visibility: isMobile ? 'hidden' : 'visible' }}>
                                 TMDB Client
                             </Typography>
                             <Typography variant="h6"
