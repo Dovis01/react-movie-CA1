@@ -52,7 +52,7 @@ const ThirdPartyAuthByGoogle = () => {
                     onClose={handleSnackClose}
                 >
                     <Typography variant="h6">
-                        {`Welcome ${user.displayName}, your email is ${user.email}`}
+                        {user === null ? 'Welcome, your email is null' : `Welcome ${user.displayName}, your email is ${user.email}`}
                     </Typography>
                 </MuiAlert>
             </Snackbar>
@@ -128,6 +128,8 @@ const ThirdPartyAuthByGitHub = () => {
     );
 };
 const ThirdPartyAuthSignIn = () => {
+
+
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>

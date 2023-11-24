@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-
+import {onAuthStateChanged} from 'firebase/auth';
+import {auth} from '../firebase.js';
 export const MoviesContext = React.createContext(null);
 
 const MoviesContextProvider = (props) => {
     const [favorites, setFavorites] = useState( [] )
     const [myReviews, setMyReviews] = useState( {} )
     const [toWatchList, setToWatchList] = useState( [] )
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            setUser(user);
+        } else {
+            setUser(null);
+        }
+    });
 
     const addToFavorites = (movie) => {
         let newFavorites = [];
@@ -51,6 +60,9 @@ const MoviesContextProvider = (props) => {
     const addUser = (user) => {
         setUser(user);
     };
+    const removeUser = () => {
+        setUser(null);
+    };
 
     return (
         <MoviesContext.Provider
@@ -59,6 +71,7 @@ const MoviesContextProvider = (props) => {
                 toWatchList,
                 user,
                 addUser,
+                removeUser,
                 addToFavorites,
                 removeFromFavorites,
                 removeFromWatchList,
