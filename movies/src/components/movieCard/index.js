@@ -16,6 +16,12 @@ import backgroundImageStyles from "../../theme/background";
 import Box from "@mui/material/Box";
 
 export default function MovieCard({movie, action, avatarCheck}) {
+    const truncateText = (text, maxLength) => {
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength - 3) + "...";
+        }
+        return text;
+    };
 
     return (
         <Card sx={{maxWidth: 345}} elevation={5} style={backgroundImageStyles.backgroundCardContainer}>
@@ -24,8 +30,8 @@ export default function MovieCard({movie, action, avatarCheck}) {
                     avatarCheck(movie)
                 }
                 title={
-                    <Typography variant="h5" component="p">
-                        {movie.title}{" "}
+                    <Typography variant="h5" component="p" style={{marginLeft: '-17px'}}>
+                        {truncateText(movie.title, 20)}
                     </Typography>
                 }
             />

@@ -18,6 +18,13 @@ import Woman2OutlinedIcon from '@mui/icons-material/Woman2Outlined';
 
 export default function PeopleCard({people, action, avatarCheck}) {
 
+    const truncateText = (text, maxLength) => {
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength - 3) + "...";
+        }
+        return text;
+    };
+
     return (
         <Card sx={{maxWidth: 345}} elevation={5} style={backgroundImageStyles.backgroundCardContainer}>
             <CardHeader
@@ -25,8 +32,8 @@ export default function PeopleCard({people, action, avatarCheck}) {
                     avatarCheck(people)
                 }
                 title={
-                    <Typography variant="h5" component="p">
-                        {people.name}{" "}
+                    <Typography variant="h5" component="p" style={{marginLeft: '-17px'}}>
+                        {truncateText(people.name, 20)}
                     </Typography>
                 }
             />
